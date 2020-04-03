@@ -1,11 +1,19 @@
-#!/bin/bash
+#!/bin/ash
+
+export PATH=$PATH:/usr/local/bin
 
 set -e
 
-/usr/local/bin/tailscaled --state=tailscaled.state
+mkdir /dev/net
+mknod /dev/net/tun c 10 200
 
-/usr/local/bin/tailscale up
+tailscaled --state=/state/tailscaled.state &
 
-white true; do
+sleep 10
+
+tailscale up
+
+while true
+do
     sleep 60
 done

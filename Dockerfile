@@ -18,6 +18,4 @@ FROM alpine:3.11
 RUN apk add --no-cache ca-certificates iptables
 COPY --from=build-env /go/bin/* /usr/local/bin/
 COPY docker-entrypoint.sh /usr/local/bin
-RUN mkdir /dev/net
-RUN mknod /dev/net/tun c 10 200
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
